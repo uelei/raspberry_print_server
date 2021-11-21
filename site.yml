@@ -1,0 +1,39 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: update repositories
+      ansible.builtin.apt:
+          cache_valid_time: 86400
+          update_cache: yes
+
+    - name: install cups
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - cups
+        - printer-driver-gutenprint
+
+    - name: add pi to lpadmin group
+      ansible.builtin.user:
+        name: pi
+        groups: lpadmin
+        append: yes
+
+    - name: configure cupsd
+      ansible.builtin.copy:
+        src: files/cupsd.conf
+        dest: /etc/cups/cupsd.conf
+        owner: root
+        group: lp
+        mode: '0640'
+      register: service_cups
+
+    - name: restart cups
+      ansible.builtin.systemd:
+        name: cups
+        enabled: True
+        state: restarted
+      when: service_cups.changed
