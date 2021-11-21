@@ -1,6 +1,6 @@
 # Ansible - Configure CUPS on a Raspberry Pi
 
-The Ansible playbook in this repository configures a print server using [CUPS](https://www.cups.org/) on a Raspberry Pi.
+The Ansible playbook in this repository configures a print server using [CUPS](https://www.cups.org/).
 
 Refer the following guide for instructions on common setup tasks,
 * rpi-basic
