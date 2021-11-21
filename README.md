@@ -16,5 +16,5 @@ Refer the following guide for instructions on common setup tasks,
 
 Run the playbook on the Raspberry Pi using the following command,
 ```
-./bin/apply.sh
+$ ./bin/apply.sh
 ```
